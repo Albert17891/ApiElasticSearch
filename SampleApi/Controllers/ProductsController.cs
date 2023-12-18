@@ -116,12 +116,10 @@ public class ProductsController : ControllerBase
 
     [Route("Query")]
     [HttpPost]
-    public async Task<IActionResult> Query([FromBody] string jsonQuery)
+    public async Task<IActionResult> Query([FromBody] QueryContainer queryContainer)
     {
-        var response = await _elasticClient.SearchAsync<Product>(new SearchRequest<Product>("product")
-        {
-            Query = new RawQuery(jsonQuery)
-        });
+        var response = await _elasticClient.SearchAsync<Product>(s => s.Index("").Query(q => queryContainer));
+       
 
         if (response.IsValid)
         {
