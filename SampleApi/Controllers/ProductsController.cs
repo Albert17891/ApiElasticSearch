@@ -14,7 +14,6 @@ public class ProductsController : ControllerBase
     public ProductsController(IElasticClient elasticClient)
     {
         _elasticClient = elasticClient;
-
     }
 
     [Route("GetProducts")]
@@ -43,7 +42,6 @@ public class ProductsController : ControllerBase
         var result = await _elasticClient.SearchAsync<Product>(s => s.Query(q => q.Term(t => t
                                                                  .Field(f => f.Name)
                                                                  .Value(keyword))));
-
 
 
         if (result.IsValid)
@@ -95,7 +93,6 @@ public class ProductsController : ControllerBase
         if (res.IsValid)
             return Ok();
 
-
         return BadRequest();
     }
 
@@ -109,7 +106,6 @@ public class ProductsController : ControllerBase
 
         if (res.IsValid)
             return Ok(res.Aggregations.Average("average_price").Value);
-
 
         return BadRequest();
     }
@@ -129,8 +125,5 @@ public class ProductsController : ControllerBase
         {
             return BadRequest();
         }
-
-
     }
-
 }

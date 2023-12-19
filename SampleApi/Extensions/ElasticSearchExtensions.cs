@@ -13,10 +13,9 @@ public static class ElasticSearchExtensions
                                       .Get<List<string>>();
 
 
-        var settings = new ConnectionSettings(new Uri(url))
+        var settings = new ConnectionSettings(new Uri(url))            
             .PrettyJson()
             .DefaultIndex(defaultIndex);
-
 
         AddDefaultMappings(settings);
 
